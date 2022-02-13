@@ -1,5 +1,6 @@
 from flask import Flask, json, request
 import robot
+import sys
 
 api = Flask(__name__)
 
@@ -29,4 +30,11 @@ def mouse_button():
 
 
 if __name__ == '__main__':
-    api.run(host="192.168.100.10", port=8080)
+    host = "192.168.100.10"
+
+    if len(sys.argv) > 1:
+        host = sys.argv[1]
+
+    print(host)
+
+    api.run(host=host, port=8080)
