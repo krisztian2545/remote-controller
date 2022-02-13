@@ -1,13 +1,14 @@
-import keyboard
-import mouse
+# import keyboard
+# import mouse
 import math
+import pyautogui
 
 x_remainder = 0
 y_remainder = 0
 
 mouse_button_dict = {
-    'MouseButton.left': mouse.LEFT,
-    'MouseButton.right': mouse.RIGHT
+    'MouseButton.left': 'left',
+    'MouseButton.right': 'right'
 }
 
 
@@ -32,17 +33,21 @@ def move_cursor_to(x, y):
     x_remainder, x = math.modf(x)
     y_remainder, y = math.modf(y)
 
-    mouse.move(x, y, absolute=False)
+    # mouse.move(x, y, absolute=False)
+    pyautogui.moveRel(xOffset=x, yOffset=y)
 
 
 def mouse_button(mouse_button, event_type):
     # print(mouse_button, event_type)
     if event_type == "EventActionType.down":
-        mouse.press(mouse_button_dict[mouse_button])
+        # mouse.press(mouse_button_dict[mouse_button])
+        pyautogui.mouseDown(button=mouse_button_dict[mouse_button])
 
     if event_type == "EventActionType.up":
-        mouse.release(mouse_button_dict[mouse_button])
+        # mouse.release(mouse_button_dict[mouse_button])
+        pyautogui.mouseUp(button=mouse_button_dict[mouse_button])
 
 
 def type_text(text):
-    keyboard.write(text)
+    # keyboard.write(text)
+    pyautogui.typewrite(text)
